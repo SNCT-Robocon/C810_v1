@@ -21,6 +21,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
 namespace UserCode
 {
+
+    //bool ok = false;
+
     void cpp_main_init(){
 
         hard_timer_10kHz.set_callback(timer_interruption_10kHz);
@@ -32,11 +35,17 @@ namespace UserCode
 
     void cpp_main_while(){
 
+        //stlink.transmit_debug("in the while\r\n");
+
+        //stlink.transmit_debug("ok is %d \r\n", ok);
+
         duty = 1000;
 
     }
 
     void timer_interruption_10kHz(){
+
+        //ok = true;
 
         uint8_t state = hall_sensor_1.get_state() << 2 | hall_sensor_2.get_state() << 1 | hall_sensor_3.get_state();
 
